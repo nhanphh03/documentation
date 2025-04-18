@@ -1,0 +1,39 @@
+version: '3'
+services:
+
+#  web:
+#    image: nginx:latest
+#    ports:
+#      - "80:80"
+#    volumes:
+#      - ./web:/usr/share/nginx/html
+#    networks:
+#      - webnet
+#    depends_on:
+#      - db
+
+  db-primary:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: Nhanph21..
+      ports:
+        - "2003:3306"
+
+  db-secondary:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: Nhanph21..
+      ports:
+        - "1909:8080"
+        -
+  activemq:
+    image: apache/activemq:5.17.5
+    ports:
+      - "8161:8161"
+      - "61616:61616"
+    environment:
+      ACTIVEMQ_USER: admin
+      ACTIVEMQ_PASSWORD: admin
+    volumes:
+      - ./activemq-data:/opt/activemq/data

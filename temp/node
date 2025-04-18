@@ -1,0 +1,96 @@
+Oracle Universal Connection Pool (UCP)
+
+So sánh HTTP/HTTPS
+
+Sử dụng UUID làm khóa chính cho cơ sở dữ liệu
+
+What is the difference between List.of and Arrays.asList? https://stackoverflow.com/questions/46579074/what-is-the-difference-between-list-of-and-arrays-aslist   https://medium.com/@tecnicorabi/list-of-vs-arrays-aslist-the-hidden-differences-that-can-crash-your-code-02d7890a1d02
+
+How does Redis handle running out of maximum allocated memory?
+
+Asynchronous vs synchronous execution. What is the difference?
+--> https://stackoverflow.com/questions/748175/asynchronous-vs-synchronous-execution-what-is-the-difference
+why i use asynchronous in java ?
+https://viblo.asia/p/co-ban-lap-trinh-synchronous-va-asynchronous-OeVKBBr2KkW
+https://medium.com/@jaykrs/java-synchronous-vs-asynchronous-f3fdc5b68598
+https://medium.com/@rajatsikder/asynchronous-programming-use-cases-86727de31992
+https://medium.com/@rajatsikder/what-is-asynchronous-programming-9cf938db2b46
+
+
+
+
+https://viblo.asia/p/top-10-project-github-giup-ban-len-trinh-java-phan-1-E1XVOb88LMz
+https://viblo.asia/p/top-10-project-github-giup-ban-len-trinh-java-phan-2-aAY4q7aqLPw
+https://viblo.asia/p/11-github-repositories-ma-developer-nen-follow-Eb85oraWl2G
+https://www.linkedin.com/pulse/level-up-your-software-engineering-skills-without-burnout-reagan-w0ezc/
+
+
+
+
+
+
+
+
+
+
+Ở tuổi 33, mình có đôi điều muốn nhắn gửi đến các bạn trẻ tuổi 23 – những người đang bắt đầu hành trình đầy hứa hẹn phía trước.
+
+1. Tập trung là siêu năng lực hiếm hoi trong thời đại quá nhiều thứ cần chúng ta chú ý. Nếu bạn không rèn luyện khả năng làm việc sâu, bạn sẽ mãi bị cuốn theo những thứ không đáng.
+
+2. Giỏi một kỹ năng có giá trị cao tốt hơn là biết nhiều thứ hời hợt. Thành công không đến từ việc bạn làm tất cả, mà đến từ việc bạn làm một thứ đủ tốt đề không ai có thể phớt lờ bạn.
+
+3. Sự nghiệp vững chắc không đến từ đam mê, mà đến từ việc bạn tạo ra giá trị. Làm tốt công việc trước, đam mê sẽ theo sau.
+
+4. Bạn không thể làm việc sáng tạo nếu lúc nào cũng bị phân tâm. Giảm bớt mạng xã hội, email, thông báo. Hơi lặp lại điều 1 nhưng kệ đi, điều quan trọng phải nói nhiều lần.
+
+5. Mọi thứ có ý nghĩa đều cần thời gian. Nếu bạn muốn có kết quả ngay lập tức, bạn sẽ mãi chạy theo những thứ bề nổi mà thôi.
+
+6. Thành công không đến từ việc làm nhiều thứ, mà đến từ việc làm đúng thứ. Chọn lọc kỹ lưỡng cách bạn dành thời gian và năng lượng.
+
+7. Để có tự do, bạn phải kiểm soát được kỹ năng và công việc của mình. Đừng để người khác quyết định giá trị của bạn.
+
+8. Học một kỹ năng high-income càng sớm càng tốt. Với mình, đó là copywriting.
+
+9. Thói quen hàng ngày của bạn quyết định bạn trở thành ai. Nếu bạn không có một hệ thống làm việc hiệu quả, bạn sẽ mãi loay hoay.
+
+10. Đừng nhầm lẫn giữa bận rộn và hiệu quả. Làm ít hơn, nhưng làm tốt hơn. Kết quả đến từ chất lượng của công việc, không phải số giờ bạn bỏ ra.
+
+Bỏ túi 30 System Design Concepts mọi Developer đều cần
+1. Client-Server Architecture
+2. IP Address
+3. DNS
+4. Proxy / Reverse Proxy
+5. Latency
+6. HTTP/HTTPS
+7. APIs
+8. Rest API
+9. GraphQL
+10. Databases
+11. SQL vs NoSQL
+12. Vertical Scaling
+13. Horizontal Scaling
+14. Load Balancers
+15. Indexing
+16. Replication
+17. Sharding
+18. Vertical Partitioning
+19. Caching
+20. Denormalization
+21. CAP Theorem
+22. Blob Storage
+23. CDN
+24. WebSockets
+25. Webhooks
+26. Microservices
+27. Message Queues
+28. Rate Limiting
+29. API Gateways
+30. Idempotency
+
+
+
+
+
+
+
+
