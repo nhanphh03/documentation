@@ -45,3 +45,7 @@ Với Prototype Bean cần quản lý tài nguyên, có thể dùng Object Pool 
 
 Đừng trông chờ Spring hủy Bean tự động như GC, vì Spring được thiết kế để quản lý chủ động vòng đời Bean
 
+
+argocd
+
+Khi nào @Transactional thực sự hoạt động?
