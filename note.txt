@@ -1,0 +1,130 @@
+Vấn đề N+1 query trong trường hợp của bạn xảy ra khi hệ thống phải thực hiện:
+
+1. 1 query chính để lấy danh sách `UserTrace` (đã phân trang)
+2. N query phụ để lấy thông tin `User` và `Role` cho từng bản ghi `UserTrace`
+
+Dưới đây là các giải pháp tối ưu:
+
+### 1. Sử dụng `@EntityGraph` (Giải pháp tối ưu nhất)
+
+public interface UserTraceRepository extends JpaRepository<UserTrace, Long> {
+    @EntityGraph(attributePaths = {"user", "user.role"})
+    Page<UserTrace> findAllByOrderByCreatedAtDesc(Pageable pageable);
+}
+
+### 2. Sử dụng JOIN FETCH với Query JPQL/HQL
+
+```java
+@Query("SELECT ut FROM UserTrace ut JOIN FETCH ut.user u JOIN FETCH u.role ORDER BY ut.createdAt DESC")
+Page<UserTrace> findAllWithUserAndRole(Pageable pageable);
+```
+
+*Lưu ý:* Với cách này cần custom count query:
+
+```java
+@Query(
+    value = "SELECT ut FROM UserTrace ut JOIN FETCH ut.user u JOIN FETCH u.role ORDER BY ut.createdAt DESC",
+    countQuery = "SELECT COUNT(ut) FROM UserTrace ut"
+)
+Page<UserTrace> findAllWithUserAndRole(Pageable pageable);
+```
+
+### 3. Sử dụng DTO Projection
+
+```java
+public interface UserTraceProjection {
+    Long getId();
+    String getIpAddress();
+    String getContentBefore();
+    String getContentAfter();
+    LocalDateTime getCreatedAt();
+    UserInfo getUser();
+    
+    interface UserInfo {
+        String getUsername();
+        String getEmail();
+        RoleInfo getRole();
+        
+        interface RoleInfo {
+            String getName();
+        }
+    }
+}
+
+// Repository
+@Query("SELECT ut FROM UserTrace ut JOIN ut.user u JOIN u.role r")
+Page<UserTraceProjection> findAllTraces(Pageable pageable);
+```
+
+### 4. Cấu hình Batch Fetching
+
+Thêm vào `application.properties`:
+```properties
+spring.jpa.properties.hibernate.default_batch_fetch_size=20
+```
+
+Hoặc annotation trên entity:
+```java
+@BatchSize(size = 20)
+@ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = "user_id", nullable = false)
+private User user;
+```
+
+### 5. Sử dụng Spring Data JPA Specifications
+
+```java
+public static Specification<UserTrace> withUserAndRole() {
+    return (root, query, cb) -> {
+        if (Long.class != query.getResultType()) {
+            root.fetch("user", JoinType.LEFT).fetch("role", JoinType.LEFT);
+        }
+        return null;
+    };
+}
+
+// Repository
+Page<UserTrace> findAll(Specification<UserTrace> spec, Pageable pageable);
+
+// Service
+userTraceRepository.findAll(withUserAndRole(), pageable);
+```
+
+### So sánh các giải pháp:
+
+| Giải pháp | Ưu điểm | Nhược điểm |
+|-----------|---------|------------|
+| @EntityGraph | Dễ triển khai, hỗ trợ sẵn | Khó customize phức tạp |
+| JOIN FETCH | Linh hoạt | Phải viết countQuery |
+| DTO Projection | Hiệu năng tốt nhất | Code nhiều hơn |
+| Batch Fetching | Đơn giản | Vẫn có N query nhưng giảm đáng kể |
+| Specifications | Linh hoạt | Code phức tạp hơn |
+
+**Khuyến nghị:** Nên bắt đầu với `@EntityGraph` vì đơn giản và hiệu quả. Nếu cần performance cao hơn thì chuyển sang DTO Projection.
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+Nếu bạn tạo một class UserTrace tách biệt (không phải inner class) và sử dụng tương tự thì sẽ không gây lỗi, thậm chí đây là cách làm được khuyến khích vì những lý do sau:
+
+✅ Ưu điểm khi tách thành class độc lập:
+Tránh lỗi NoSuchMethodException
+
+ModelMapper/Jackson có thể dễ dàng khởi tạo instance mà không cần quan tâm đến outer class.
+
+Code rõ ràng, dễ bảo trì hơn
+
+Mỗi class có file riêng, dễ quản lý và tìm kiếm.
+
+Tái sử dụng tốt hơn
+
+Có thể dùng UserTrace ở nhiều nơi khác mà không phụ thuộc vào UserTraceResponse.
+
+Tránh các vấn đề phức tạp với serialization
+
+Một số thư viện JSON (như Jackson) xử lý static nested class không nhất quán.
+
+--------------------------------------------------------------------------------------------------------------------------------------------
